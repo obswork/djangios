@@ -2,7 +2,8 @@ from django.db import models
 
 
 class DataPoint(models.Model):
-    """Stores client info with datetime, type, and value of data point collected
+    """
+    Stores client info with datetime, type, and value of data point collected
     """
 
     node_name = models.CharField(max_length=255)
