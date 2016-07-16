@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Defined Alerts</h3>
+    {% if object_list %}
+    <div class='table-responsive'>
+        <table class='table table-striped table-bordered table-hover table-sm'>
+            <thead class='table-success'>
+                <tr>
+                    <th>Node Name</th>
+                    <th>Metric</th>
+                    <th>Min Value</th>
+                    <th>Max Value</th>
+                    <th>Active</th>
+                </tr>        
+            </thead>
+            <tbody>
+                {% for alert in object_list %}
+                <tr>
+                    <td>{{ alert.node_name }}</td>
+                    <td>{{ alert.data_type }}</td>
+                    <td>{{ alert.min_value }}</td>
+                    <td>{{ alert.max_value }}</td>
+                    <td>{{ alert.active }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <i>No alerts defined </i>
+    {% endif %}
+{% endblock %}

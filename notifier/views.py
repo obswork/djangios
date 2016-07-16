@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from notifier.models import Alert
 
-# Create your views here.
+
+class AlertListView(ListView):
+    template_name = 'alerts_list.html'
+    model = Alert

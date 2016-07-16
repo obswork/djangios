@@ -8,9 +8,11 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from collector.views import StatusView
+from notifier.views import AlertListView
 
 urlpatterns = [
     url(r'^home/$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
+    url(r'^alerts/$', AlertListView.as_view(), name='alerts-list'),
     url(r'^$', StatusView.as_view(), name='status'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
