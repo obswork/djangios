@@ -12,6 +12,7 @@
                     <th>Max Value</th>
                     <th>Active</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                 </tr>        
             </thead>
             <tbody>
@@ -22,13 +23,21 @@
                         <td>{{ alert.data_type }}</td>
                         <td>{{ alert.min_value }}</td>
                         <td>{{ alert.max_value }}</td>
-                        <td>{{ alert.active }}</td>
-                        <td><a href="{% url 'alerts-edit' pk=alert.pk %}">Edit</a></td>
+                        {% if alert.active %}
+                            <td><i class="fa fa-check text-success" aria-hidden='true'></i></td>
+                        {% else %}
+                            <td><i class="fa fa-close text-danger" aria-hidden='true'></i></td>
+                        {% endif %}
+                        <td><a href="{% url 'alerts-edit' pk=alert.pk %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                        <td><a href="{% url 'alerts-delete' pk=alert.pk %}"><i class="fa fa-eraser text-danger" aria-hidden="true"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td class="text-lg-center" colspan="7"><a href="{% url 'alerts-new' %}">Add new alert</a></td>
                     </tr>
                 {% endfor %}
                 {% else %}
                 <tr>
-                    <td colspan="5">No alerts defined</td>
+                    <td colspan="6">No alerts defined</td>
                     <td><a href="{% url 'alerts-new' %}">Add New Alert</a></td>
                 </tr>
             {% endif %}

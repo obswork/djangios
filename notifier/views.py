@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 from notifier.models import Alert
 
@@ -25,6 +25,14 @@ class EditAlertView(UpdateView):
     fields = [
         'node_name', 'data_type', 'max_value', 'min_value', 'active'
     ]
+
+    def get_success_url(self):
+        return reverse('alerts-list')
+
+
+class DeleteAlertView(DeleteView):
+    template_name = 'delete_alert.html'
+    model = Alert
 
     def get_success_url(self):
         return reverse('alerts-list')
