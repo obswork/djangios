@@ -47,6 +47,7 @@ LOCAL_APPS = (
     'djangios.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'collector',
+    'notifier',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
