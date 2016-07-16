@@ -46,6 +46,7 @@ LOCAL_APPS = (
     # custom users app
     'djangios.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'collector',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
