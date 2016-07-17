@@ -3,6 +3,7 @@ from collector.models import DataPoint
 
 
 class StatusView(TemplateView):
+    # TODO: refactor as ListView --> and then into DRF ModelViewSet
     template_name = 'status.html'
 
     def get_context_data(self, **kwargs):

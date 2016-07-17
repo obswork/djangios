@@ -22,7 +22,8 @@
 
             {# data_status looks something like: #}
             {# [ { 'node_name': {'data_type1': value, 'data_type2': value}, 'node_name2': {...} } ]#}
-            
+        
+            {# TODO: refactor data_status --> object_list when updating StatusView to ListView #}
 
             {% for node_name, data_point_map in data_status.items %}
                 {% for data_type, data_point in data_point_map.items %}
