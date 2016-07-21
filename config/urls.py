@@ -7,10 +7,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
-from collector.views import StatusView
+from django.views.decorators.csrf import csrf_exempt
+from collector.views import StatusView, RecordApiView
 from notifier.views import AlertListView, NewAlertView, EditAlertView, DeleteAlertView
 
 urlpatterns = [
+    # TODO: refactor api to utilize DRF..csrf_exempt - FOR TESTING ONLY
+    url(r'^api/record/$', csrf_exempt(RecordApiView.as_view()), name='record-data'),
     url(r'^home/$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     url(r'^alerts/new/$', NewAlertView.as_view(), name='alerts-new'),
     url(r'^alerts/(?P<pk>\d+)/edit/$', EditAlertView.as_view(), name='alerts-edit'),

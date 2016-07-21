@@ -1,5 +1,7 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from collector.models import DataPoint
+from django.forms.models import modelform_factory
+from django.http.response import HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 
 
 class StatusView(TemplateView):
@@ -32,3 +34,20 @@ class StatusView(TemplateView):
         context['data_status'] = data_status
 
         return context
+
+
+class RecordApiView(View):
+
+    def post(self, request, *args, **kwargs):
+        # check if the secret keys match
+        if request.META.get('HTTP_AUTH_SECRET') != 'iamasecretkey':
+            return HttpResponseForbidden('Auth key incorrect!')
+
+        # modelform_factory creates modelform subclass of given model, editable fields limited by fields kwarg
+        form_class = modelform_factory(DataPoint, fields=['node_name', 'data_type', 'data_value'])
+        form = form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse()
+        else:
+            return HttpResponseBadRequest()
